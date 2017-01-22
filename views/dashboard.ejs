@@ -74,7 +74,7 @@
 						  </div>
 						<div class="col-xs-6">
 						    
-						  <a href="/waterpoints">See Full List</a> <a href="waterpoint/new" class="pull-right">Add Free Water Point</a>
+						  <a href="/waterpoints">See Full List</a> <a href="/waterpoint/new" class="pull-right">Add Free Water Point</a>
 						</div>
 					  </div>
 					  <div class="panel-body">
@@ -136,42 +136,30 @@
 					  </div>
 					</div>
 				</div>
-				<!-- <div class="col-xs-12 col-md-3">
-					<div class="panel panel-default boxy">
-					  <div class="panel-heading">
-					    <h3 class="panel-title">Water Cost</h3>
-					  </div>
-					  <div class="panel-body">
-					    Panel content
-					  </div>
-					</div>
-				</div> -->
 			</div>
 		</div>
 
-
-
-
-
-
-
-
-
-
-
-
+		<input type="hidden" id="startLat" name="startLat">
+		<input type="hidden" id="startLon" name="startLon">
+		<!-- <input type="hidden" id="startCity" name="startCity" value="<%=city%>">
+		<input type="hidden" id="startState" name="startState" value="<%=state%>"> -->
+		<input type="hidden" id="latitude" name="latitude" value="<%=latitude%>">
+		<input type="hidden" id="longitude" name="longitude" value="<%=longitude%>">
 	</body>
 </html>
 <script type="text/javascript">
+window.onload = function() {
+  var startPos;
+  var geoSuccess = function(position) {
+    startPos = position;
+    console.log(position);
+    document.getElementById('startLat').innerHTML = startPos.coords.latitude;
+    document.getElementById('startLon').innerHTML = startPos.coords.longitude;
+  };
+  navigator.geolocation.getCurrentPosition(geoSuccess);
 
-  $.ajax({
-  method: "GET",
-  url: "/ajax/stores"
-})
-  .done(function( msg ) {
-
-    console.log(msg);
-  });
+};
+  
 
 var options = {
 
@@ -209,10 +197,7 @@ var autocomplete = new google.maps.places.Autocomplete(input,options)
             console.log(state);
             console.log(zip);
 
-            
-           //  console.log(place.address_components);
-           // console.log(place.address_components[0].long_name);
-           // console.log(place.geometry.location.lat());
+         updateMap();
 
         });
 
@@ -256,26 +241,61 @@ var autocomplete = new google.maps.places.Autocomplete(input,options)
 
 <script>
       function initMap() {
-        var uluru = {lat: 38.5382, lng: -121.7617};
+
+      	var myCity = $("#startCity").val();
+		var myState = $("#startState").val()
+		var myLat = parseFloat($("#latitude").val())
+		var myLong = parseFloat($("#longitude").val())
+		console.log("CITYSTATE");
+		console.log(myCity);
+		console.log(myState);
+		console.log(myLat);
+		console.log(myLong);
+
+        var uluru = {lat: myLong, lng: myLat};
         var map = new google.maps.Map(document.getElementById('map'), {
           zoom: 10,
           center: uluru
         });
-        // var marker = new google.maps.Marker({
-        //   position: uluru,
-        //   map: map
-        // });
+        var infowindow = null;
+		/* now inside your initialise function */
+		infowindow = new google.maps.InfoWindow({
+		content: "holding..."
+		});
 
-        var results = [{lat:38.5382,long:-121.7617},{lat:38.5354,long:-121.7463}]
-        for (var i = 0; i < results.length; i++) {
-          var latLng = new google.maps.LatLng(results[i].lat,results[i].long);
-          var marker = new google.maps.Marker({
-            position: latLng,
-            map: map
-          });
-        }
+		
+		
 
-      }
+        $.ajax({
+		  method: "POST",
+		  url: "/ajax/stores",
+		  data: { latitude: myLong, longitude: myLat }
+		})
+		  .done(function( msg ) 
+		  {
+		  	console.log(msg);
+		  	for (x in msg)
+		  	{
+		  		var latLng = new google.maps.LatLng(msg[x].coordinate.latitude,msg[x].coordinate.longitude);
+		          var marker = new google.maps.Marker({
+		            position: latLng,
+		            map: map,
+		            title: msg[x].name,
+		            info: msg[x].name,
+		            html: "<h3>"+msg[x].name+"</h3>"
+		    	})		// console.log(msg)
+		  	
+			  	google.maps.event.addListener(marker, 'click', function () {
+				// where I have added .html to the marker object.
+				infowindow.setContent(this.html);
+				infowindow.open(map, this);
+				});
+			}
+		});
+    }
+
+
+     
     </script>
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAxWzXGc9oLo60oyxaiuOaqnFOkpnX5lsI&callback=initMap">

@@ -20,18 +20,19 @@ module.exports = function(app){
 	}),
 
 	app.get("/dashboard", function(request,response) {
-		console.log(request.url);
-		locations = yelper.search(request,response);
+	
+		// locations = yelper.search(request,response);
 		
-		response.render('dashboard',{all_locations:locations});
+		response.render('dashboard');
 	}),
 
 	app.post("/users/create",function(request,response) {
 		users.create(request,response)
 	}),
 
-	app.post("/providers/search",function(request,response) {
-		response.json(request.body);
+	app.post("/dashboard/search",function(request,response) {
+		response.render('dashboard',{city:request.body.city,state:request.body.state,latitude:request.body.latitude,longitude:request.body.longitude})
+
 	}),
 
 	app.post("/waterpoint/create",function(request,response){
@@ -43,7 +44,11 @@ module.exports = function(app){
 		response.render('new_water_point');
 	})
 
-	app.get("/ajax/stores",function(request,response){
+	app.post("/ajax/stores",function(request,response){
 		yelper.search(request,response);
+	})
+
+	app.post("/ajax/freePoints",function(request,response){
+		waterpoints.all(request,response);
 	})
 }

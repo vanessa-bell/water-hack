@@ -4,16 +4,21 @@ var models  = require('../models');
 module.exports = {
   all: function(request, response) {
     console.log('in the all function')
-    models.Waterpoint.findAll({}).then(function(waterpoints){
+    models.Waterpoint.findAll({
+    }).then(function(waterpoints){
         // if(err){
         //   console.log(err)
         //   console.log(users[0])
         //   response.render('users',{all_users:users,errors:err})
         // }
         // else {
-          console.log(users)
-          response.render('users', {all_waterpoints:waterpoints,errors:'None'});
-        // }
+          if(request.url =='/waterpoint/new')
+          {
+          response.render('new_water_point', {all_waterpoints:waterpoints,errors:'None'});
+          }
+          else if (request.url =='/ajax/freePoints') {
+            response.json(waterpoints);
+          }
       })
   },
   create: function(request, response) 
