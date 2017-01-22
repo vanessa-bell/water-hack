@@ -21,7 +21,7 @@ app.use(function(request, response, next){
 var Sequelize = require('sequelize');
 // var sequelize = new Sequelize('database', 'username', 'password');
 // var sequelize = new Sequelize('mysql://Weitzmam:i229rorY!@aa1o6qlyflb1dy1.ct0hnq2ct2gz.us-east-1.rds.amazonaws.com:3306/hacksqltest');
-// var sequelize = new Sequelize('mysql://root:root@localhost/hacksqltest');
+var sequelize = new Sequelize('mysql://user:@localhost/hacksqltest');
 
 var models = require("./server/models");
 

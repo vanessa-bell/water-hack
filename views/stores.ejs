@@ -8,28 +8,17 @@
 .results {
 	margin-top:10%;
 }
+
+.paidResultsTable {
+	overflow: auto;
+	height:400px;
+}
 #map {
 	width: 500px;
 }
 
 .table-striped>tbody>tr:nth-of-type(even) {
     background-color: #FFFFFF;
-}
-
-.tab-content {
-	overflow: auto;
-	height:400px;
-	margin-top: 0px;
-	vertical-align: top;
-}
-
-.yelp {
-	height: 50px;
-	display: block;
-}
-
-.nav {
-	margin-top: 0px;
 }
 
 </style>
@@ -129,7 +118,7 @@
 				infowindow.setContent(this.html);
 				infowindow.open(map, this);
 				});
-				 $(".paidResultsTable").append("<tr><td><img src='"+msg[x].image_url+"'></td><td><a href='"+msg[x].url+"' target='_blank'>"+msg[x].name+"</a><br>"+msg[x].display_phone+"<br><a href=https://maps.google.com/?q='"+ encodeURI(msg[x].address[0]) +"' target='_blank'>"+msg[x].address[0]+"<br>"+msg[x].address[1]+ "<br> <a href="+ msg[x].url + " target='_blank'><img class='yelp' src='/images/Yelp_trademark_RGB.png'></a>" + "</td></tr>")
+				 $(".paidResultsTable").append("<tr><td><img src='"+msg[x].image_url+"'></td><td>"+msg[x].name+"</td></tr>")
 			}
 			$.ajax({
 			  method: "POST",
