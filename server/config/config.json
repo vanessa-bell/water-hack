@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "Weitzmam",
+    "password": "i229rorY!",
+    "database": "hacksqltest",
+    "host": "aa1o6qlyflb1dy1.ct0hnq2ct2gz.us-east-1.rds.amazonaws.com",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "Weitzmam",
+    "password": "i229rorY!",
+    "database": "hacksqltest",
+    "host": "aa1o6qlyflb1dy1.ct0hnq2ct2gz.us-east-1.rds.amazonaws.com",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "Weitzmam",
+    "password": "i229rorY!",
+    "database": "hacksqltest",
+    "host": "aa1o6qlyflb1dy1.ct0hnq2ct2gz.us-east-1.rds.amazonaws.com",
+    "dialect": "mysql"
+  }
+}

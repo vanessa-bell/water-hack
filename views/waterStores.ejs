@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Water Stores Near You</title>
+	<script src="/css/foundation/js/vendor/jquery.js"></script>
+	<script src="/css/foundation/js/vendor/what-input.js"></script>
+		<!-- Compressed CSS -->
+	<script src="/css/foundation/js/vendor/foundation.min.js"></script>
+
+	<!-- Compressed JavaScript -->
+	<link rel="stylesheet" href="/css/foundation/css/foundation.min.css">
+	
+	<link rel="icon" type="image/png" href="/images/water.png">
+
+	<link rel="stylesheet" type="text/css" href="/css/styles.css">
+	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAxWzXGc9oLo60oyxaiuOaqnFOkpnX5lsI&libraries=places"></script>
+
+
+</head>
+<body>
+		<div class="container">
+		<!-- nav -->
+			<div class="top-bar">
+    			<div id="responsive-menu">
+			      <div class="top-bar-left">
+			        <ul class="menu">
+			         <li class="menu-text"><a href="/"><img src="/images/smalllogo.png"/></a></li>
+			          <li><a href="#">Water Quality</a></li>
+					  <li><a href="#">Board Meetings</a></li>
+					  <li class="show-for-medium"><a href="#">Get Involved</a></li>
+			      </ul>
+			      </div> <!-- end .top-bar-left-->
+			      
+		    </div> <!-- end #responseive-menu-->
+			</div> <!-- end .top-bar -->
+
+			
+				<h1 class="text-center">Where to Buy Water</h1><p class="text-center">in <span id="current-location">Davis, CA</span> (<a href="">change location?</a>)</p>
+			<div id="main" class="row">
+				<!-- store results -->
+				<div id="results-wrapper" class="small-6 columns">
+					
+					<div class="store-result">
+					<% for (var x in stores) { %>
+						<img class="inline small-2 columns" src="<%= stores[x].image_url%>">
+						<div class="store-info inline">
+					        <h3 class="store-info small-12 columns"><%= stores[x].id %>.<a href="<%= stores[x].url%>" target="_blank"> <%= stores[x].name %></a></h3>
+					        
+					        <% if(stores[x].is_closed){ %>
+								<h6 class="closed">Closed Now
+								   </h6>
+							<% } else{ %>  
+								<h6 class="open">Open Now</h6>
+							<% } %>
+							
+						</div>
+				        <div class="small-12 columns">
+					        <img class="rating-img" src="<%= stores[x].rating%>">
+					      	<p class="inline"><%= stores[x].review_count %> reviews</p>
+					      	<p class="phone">Phone: <%= stores[x].display_phone %></p>
+					   
+							<p class="address"><%= stores[x].address[0] %></p>
+							<p class="address"><%= stores[x].address[1] %></p>
+							<% if(stores[x].address[2]){ %>
+							 <%= stores[x].address[2] %>
+							<% } %>
+						</div>	
+						<div class="small-12 columns">
+						<br>
+							<p class="inline"><%= stores[x].snippet_text %>&nbsp;<a href="<%= stores[x].url%>" target="_blank">Read&nbsp;More</a></p>
+								<a href="<%= stores[x].url%>"><img class="yelp" src="/images/Yelp_trademark_RGB.png"></a>
+					    </div> <!-- end .rating -->  
+				        
+				        <hr>
+				    <% } %>
+					</div>  <!-- end store-result -->                                         
+				</div> <!-- end results-wrapper -->
+				<div id="map" class="small-6 columns">
+				<% for (var x in stores) { %>
+					<h3 class="inline"><%= stores[x].id %>.<a href="<%= stores[x].url%>" target="_blank"> <%= stores[x].name %></a></h3>
+
+					latitude: <%= stores[x].coordinate.latitude %>
+					longitude: <%= stores[x].coordinate.longitude%>
+					<br>
+				<% } %>
+				</div>
+			</div> <!-- end row -->
+			
+			
+		</div> 
+		
+	</body>
+</html>

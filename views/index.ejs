@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="/css/foundation/js/vendor/jquery.js"></script>
+<!-- <script src="/css/foundation/js/vendor/what-input.js"></script> -->
+	<!-- Compressed CSS -->
+<!-- <script src="/css/foundation/js/vendor/foundation.min.js"></script> -->
+
+<!-- Compressed JavaScript -->
+<!-- <link rel="stylesheet" href="/css/foundation/css/foundation.min.css"> -->
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAxWzXGc9oLo60oyxaiuOaqnFOkpnX5lsI&libraries=places"></script>
+<link rel="stylesheet" type="text/css" href="/css/custom.css">
+</style>
+</head>
+	<body>
+		<div class="container-fluid background-container">
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#"> <img style="max-height:100px;" alt="careOn" src="/images/logo2.png"/></a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		      <ul class="nav navbar-nav">
+		          <li class=""><a href="#">Search Water Quality<span class="sr-only">(current)</span></a></li>
+				  <li><a href="#">Volunteer</a></li>
+				  <li class="show-for-medium"><a href="#">How it works</a></li>
+		      </ul>
+		      <ul class="nav navbar-nav navbar-right">
+		        <li><a href="#">Login</a></li>
+		        <li><a href="#">Signup</a></li>
+		      </ul>
+		    </div><!-- /.navbar-collapse -->
+		  </div><!-- /.container-fluid -->
+		</nav>
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12  overlay">
+				<<!-- h2 class="hero">
+					Can I drink it?</h2> -->
+					<h3 class="hero">
+					Real time water data, real time water action</h3>
+					<form class="heroForm" method="POST" action="/providers/search">
+						<h2 style="text-align:center;"> Water quality search</h2>
+						<h3 style="text-align:center;">Find water status and clean water locations</h3>
+						<!-- <div class="row">
+							<div class="col-sm-12 col-md-3 ">
+								
+								<a class="btn special"><img class="icon" src="/images/cleaning.png"/> Cooking/Cleaning</a>
+							</div>
+							<div class="col-sm-12 col-md-3 ">
+								
+								<a class="btn special"><img class="icon" src="/images/personalcare.png"/> Personal Care</a>
+							</div>
+							<div class="col-sm-12 col-md-3 ">
+								
+								<a class="btn special"><img class="icon" src="/images/todo.png"/> Errands and Chores</a>
+							</div>
+							<div class="col-sm-12 col-md-3 ">
+							
+								<a class="btn special"><img class="icon" src="/images/alzheimers.png"/> Alzheimers</a>
+							</div>
+						</div> -->
+						<div class="row">
+							<div class="col-sm-12 col-md-6">
+							<label>Enter a city:</label>
+								<input class="form-control" id="auto-complete" type="text" placeholder="Enter a City" name="city_search">
+							
+							</div>
+							<div class="col-sm-12 col-md-3">		
+							<label> Starting	</label>
+								<input class="form-control" type="date" placeholder="Start Date" name="start_date" required>
+						
+							</div>
+							<div class="col-sm-12 col-md-3">		
+							<label>Ending	</label>
+								<input class="form-control" type="date" placeholder="Start Date" name="end_date" required>
+						
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-12 col-md-2">
+								<!-- <a class="btn frequency">One time</a> -->
+							</div>	
+							<div class="col-sm-12 col-md-2">
+								<!-- <a class="btn frequency">Daily</a> -->
+							</div>
+							<div class="col-sm-12 col-md-2">
+							<!-- 	<a class="btn frequency">Weekly</a> -->
+							</div>
+							<div class="col-sm-12 col-md-2">
+							<!-- 	<a class="btn frequency">Monthly</a> -->
+							</div>
+							<div class="col-sm-12 col-md-4">
+								<button type="submit" class="btn btn-large btn-success pull-right search">Search<button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<!-- <div class="row">
+			<h3 class="below_hero">Providing volunteer in home healthcare to seniors who can't afford it.</h3>
+		</div> -->
+		</div>
+	</body>
+</html>
+<script>
+// $(function() {
+// 	$(".special").click(function(){
+// 		// alert('clicked');
+// 		$(".special").removeClass("active");
+// 		$(this).addClass("active");
+// 		})
+// 	})
+
+// $(function() {
+// 	$(".frequency").click(function(){
+// 		// alert('clicked');
+// 		$(".frequency").removeClass("active");
+// 		$(this).addClass("active");
+// 		})
+// 	})
+
+var options = {
+
+}
+
+
+var input = document.getElementById('auto-complete');
+var autocomplete = new google.maps.places.Autocomplete(input,options)
+
+
+ </script>

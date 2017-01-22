@@ -1,0 +1,20 @@
+{
+  "development": {
+    "username": "root",
+    "password": "root",
+    "database": "hacksqltest",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "test": {
+    "dialect": "sqlite",
+    "storage": ":memory:"
+  },
+  "production": {
+    "username": "Weitzmam",
+    "password": "i229rorY!",
+    "database": "hacksqltest",
+    "host": "aa1o6qlyflb1dy1.ct0hnq2ct2gz.us-east-1.rds.amazonaws.com:3306",
+    "dialect": "mysql"
+  }
+}

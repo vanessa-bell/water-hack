@@ -1,0 +1,28 @@
+<html>
+<body>
+    <h2>Here are all the users:</h2>
+    <% if ( sessionFlash && sessionFlash.message) { %>
+<div class="<%= sessionFlash.type %>">
+	 <% for (var message in sessionFlash.message) { %>
+	<strong>FLASH!</strong> <%= message %>
+	 <% } %>
+</div>
+<% } %>
+
+
+    <% for (var x in all_users) { %>
+        <h3>Name: <%= all_users[x].first_name %></h3>
+        <h4>Age: <%= all_users[x].age %></h4>
+        <hr>
+    <% } %>
+
+    <form method="POST" action="/users/create">
+    	<input type="text" name="first_name">
+    	<input type="text" name="last_name">
+    	<input type="text" name="email">
+    	<input type="text" name="age">
+    	<input type="submit" value="submit">
+
+    </form>
+</body>
+</html>

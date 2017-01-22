@@ -1,0 +1,168 @@
+#chart_div{
+	margin-left:15%;
+	opacity: 0.8;
+}
+
+.toprow {
+	margin-top:10%;
+}
+
+#map {
+        height: 400px;
+        width: 100%;
+       }
+
+.status {
+	height:300px;
+}
+.panel {
+	background-color: rgba(255, 255, 255, 0.5)
+
+}
+
+.panel-default>.panel-heading {
+    color: #333;
+    background-color: rgba(245, 245, 245, 0.5) !important;
+    border-color: #ddd;
+    background-image: none;
+}
+
+
+
+.boxy {
+	border-radius:0px;
+	/*margin-top:20%;*/
+}
+.icon {
+	max-width: 25px !important;
+}
+
+.form-control {
+	height:50px;
+	border-radius: 0px;
+	margin-bottom:15px;
+}
+
+#auto-complete {
+	width: 100%;
+}
+.success {
+	background-color:#85B200 !important;
+	color: #FFF !important;
+	font-weight:700;
+}
+.search {
+	width:100% !important;
+	border-radius: 0px;
+	height:50px;
+
+}
+.background-container {
+	background-image:url('/images/drinkingwaterbg.jpg');
+	background-position: center;
+	background-size: cover;
+
+}
+.navbar {
+	background: none !important;
+	padding-left: 10%;
+	border:none;
+	box-shadow: none;
+}
+.navbar ul {
+	background:none !important;
+}
+
+.navbar li a {
+	color: #FFFFFF !important;
+}
+
+.hero {
+	text-align:center;
+	color: #FFF;
+/*	margin-top:1%;*/
+}
+
+.below_hero {
+	color: #333;
+	text-align: center;
+	margin-top:1%;
+}
+
+.heroForm {
+	padding:2%;
+	margin-top:10%;
+	margin-bottom:10%;
+	background-color:#FFFFFF;
+	opacity: 0.9;
+	border-radius: 2px;
+}
+
+.special {
+	background: none !important;
+	padding:10%;
+	color: #333;
+	border: 1px solid silver;
+
+}
+
+.frequency {
+	background: none !important;
+	padding:10%;
+	color: #333;
+	border: 1px solid silver;
+}
+
+.frequency:hover {
+	color: #000;
+	font-weight:900;
+}
+
+.special:hover {
+	color: #000;
+	font-weight:900;
+}
+
+.special:active {
+	border-top: 1px solid green;
+}
+
+.active {
+	border-top: 2px solid green;
+	background-color:none;
+}
+}
+
+.menu-text {
+	margin-left:10% !important;
+}
+
+.menu a {
+	color:#fff;
+	font-weight: 700;
+}
+
+.herotext {
+	text-align: center;
+	font-weight: 700;
+	color: #FFF;
+}
+.no-js .top-bar {
+  display: none;
+}
+
+@media screen and (min-width: 40em) {
+  .no-js .top-bar {
+    display: block;
+  }
+
+  .no-js .title-bar {
+    display: none;
+  }
+}
+
+@media screen and(max-width: 420px) {
+	.special {
+		margin-left:2%;
+	}
+}

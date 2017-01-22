@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="/css/foundation/js/vendor/jquery.js"></script>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAxWzXGc9oLo60oyxaiuOaqnFOkpnX5lsI&libraries=places"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<link rel="stylesheet" type="text/css" href="/css/custom.css">
+</head>
+	<body>
+		<div class="container-fluid background-container">
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#"> <img style="max-height:100px;" alt="careOn" src="/images/logo2.png"/></a>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		      <ul class="nav navbar-nav">
+		          <li class=""><a href="#">Search Water Quality<span class="sr-only">(current)</span></a></li>
+				  <li><a href="#">Volunteer</a></li>
+				  <li class="show-for-medium"><a href="#">How it works</a></li>
+		      </ul>
+		      <ul class="nav navbar-nav navbar-right">
+		        <li><a href="#">Welcome Michael</a></li>
+		        <li><a href="#">Logout</a></li>
+		      </ul>
+		    </div><!-- /.navbar-collapse -->
+		  </div><!-- /.container-fluid -->
+		</nav>
+		<div class="container">
+			<div class="row toprow">
+				<div class="col-xs-12 col-md-4">
+					<div class="panel panel-default boxy status">
+					  <div class="panel-heading">
+					  	<div class="row">
+						  <div class="col-xs-6">
+						    	<h3 class="panel-title">Water Status</h3>
+						   </div>
+						    <div class="col-xs-6"> 
+						    	<a href="#" class="pull-right">Full Report</a>
+						    </div>
+						  </div>
+					  </div>
+					  <div class="panel-body">
+					    <div id="chart_div" style="width: 400px; height: 120px;"></div>
+					    <!--  <a style="position:relative; bottom:-100px;" class="pull-right" href="#">Testing and Violation Data</a> -->
+					  </div>
+					</div>
+				</div>
+				<div class="col-xs-12 col-md-8">
+					<div class="panel panel-default boxy">
+					  <div class="panel-heading">
+					  <div class="row">
+						 <div class="col-xs-6">
+						    <h3 class="panel-title">Clean Water Locations</h3> 
+						   
+						  </div>
+						<div class="col-xs-6">
+						    
+						  <a href="/waterpoints">See Full List</a> <a href="waterpoint/new" class="pull-right">Add Free Water Point</a>
+						</div>
+					  </div>
+					  <div class="panel-body">
+					  <label>Change City</label>
+					  <input class="form-control" id="auto-complete" type="text" placeholder="Enter a City" name="city_search">
+					    <div id="map"></div>
+					  </div>
+					</div>
+				</div>
+				<!-- <div class="col-xs-12 col-md-4">
+					<div class="panel panel-default boxy">
+					  <div class="panel-heading">
+					    <h3 class="panel-title">Water Quantity</h3>
+					  </div>
+					  <div class="panel-body">
+					    Panel content
+					  </div>
+					</div> -->
+				</div>
+				<!-- <div class="col-xs-12 col-md-3">
+					<div class="panel panel-default boxy">
+					  <div class="panel-heading">
+					    <h3 class="panel-title">Water Cost</h3>
+					  </div>
+					  <div class="panel-body">
+					    Panel content
+					  </div>
+					</div>
+				</div> -->
+			<!-- </div> -->
+			<div class="row">
+				<div class="col-xs-12 col-md-4">
+					<div class="panel panel-default boxy">
+					  <div class="panel-heading">
+					    <h3 class="panel-title">Water Board</h3>
+					  </div>
+					  <div class="panel-body">
+					    Panel content
+					  </div>
+					</div>
+				</div>
+				<div class="col-xs-12 col-md-4">
+					<div class="panel panel-default boxy">
+					  <div class="panel-heading">
+					    <h3 class="panel-title">Government Representatives</h3>
+					  </div>
+					  <div class="panel-body">
+					    Panel content
+					  </div>
+					</div>
+				</div>
+				<div class="col-xs-12 col-md-4">
+					<div class="panel panel-default boxy">
+					  <div class="panel-heading">
+					    <h3 class="panel-title">Discussion</h3>
+					  </div>
+					  <div class="panel-body">
+					    Panel content
+					  </div>
+					</div>
+				</div>
+				<!-- <div class="col-xs-12 col-md-3">
+					<div class="panel panel-default boxy">
+					  <div class="panel-heading">
+					    <h3 class="panel-title">Water Cost</h3>
+					  </div>
+					  <div class="panel-body">
+					    Panel content
+					  </div>
+					</div>
+				</div> -->
+			</div>
+		</div>
+
+
+
+
+
+
+
+
+
+
+
+
+	</body>
+</html>
+<script type="text/javascript">
+
+  $.ajax({
+  method: "GET",
+  url: "/ajax/stores"
+})
+  .done(function( msg ) {
+
+    console.log(msg);
+  });
+
+var options = {
+
+}
+
+var input = document.getElementById('auto-complete');
+var autocomplete = new google.maps.places.Autocomplete(input,options)
+
+ google.maps.event.addListener(autocomplete, 'place_changed', function () {
+            var place = autocomplete.getPlace();
+            // document.getElementById('city2').value = place.name;
+            // document.getElementById('cityLat').value = place.geometry.location.lat();
+            var formattedAddress = place.formatted_address;
+            var individualAddressComponents = formattedAddress.split(',');
+             var stateString = individualAddressComponents[2];
+             var state = stateString.substring(0,3);
+            var zip = stateString.substring(4,9)
+            document.getElementById('latitude').value = place.geometry.location.lng();
+            document.getElementById('longitude').value = place.geometry.location.lat();
+            document.getElementById('street_number').value = place.name;
+            // document.getElementById('street_name').value = place.address_components[1].long_name
+            document.getElementById('city').value = individualAddressComponents[1];
+            document.getElementById('state').value = state;
+            document.getElementById('zip').value = zip;
+            console.log("This function is working!");
+            console.log(place.name);
+            // console.log(place);
+            // var addressComponents = input.split(',');
+            console.log(place.formatted_address);
+            console.log(individualAddressComponents);
+            console.log(stateString);
+            console.log(place.geometry.location.lng());
+            console.log(place.geometry.location.lat());
+            
+            console.log(state);
+            console.log(zip);
+
+            
+           //  console.log(place.address_components);
+           // console.log(place.address_components[0].long_name);
+           // console.log(place.geometry.location.lat());
+
+        });
+
+
+	google.charts.load('current', {'packages':['gauge']});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Label', 'Value'],
+          ['Quality', 20]
+        ]);
+
+        var options = {
+          width: 200, height: 220,
+          redFrom: 0, redTo: 25,
+          yellowFrom:25, yellowTo: 75,
+          greenFrom: 75, greenTo: 100,
+          minorTicks: 5
+        };
+
+        var chart = new google.visualization.Gauge(document.getElementById('chart_div'));
+
+        chart.draw(data, options);
+
+        setInterval(function() {
+          data.setValue(0, 1, 40 + Math.round(60 * Math.random()));
+          chart.draw(data, options);
+        }, 13000);
+        setInterval(function() {
+          data.setValue(1, 1, 40 + Math.round(60 * Math.random()));
+          chart.draw(data, options);
+        }, 5000);
+        setInterval(function() {
+          data.setValue(2, 1, 60 + Math.round(20 * Math.random()));
+          chart.draw(data, options);
+        }, 26000);
+    }
+
+</script>
+
+<script>
+      function initMap() {
+        var uluru = {lat: 38.5382, lng: -121.7617};
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 10,
+          center: uluru
+        });
+        // var marker = new google.maps.Marker({
+        //   position: uluru,
+        //   map: map
+        // });
+
+        var results = [{lat:38.5382,long:-121.7617},{lat:38.5354,long:-121.7463}]
+        for (var i = 0; i < results.length; i++) {
+          var latLng = new google.maps.LatLng(results[i].lat,results[i].long);
+          var marker = new google.maps.Marker({
+            position: latLng,
+            map: map
+          });
+        }
+
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAxWzXGc9oLo60oyxaiuOaqnFOkpnX5lsI&callback=initMap">
+    </script>

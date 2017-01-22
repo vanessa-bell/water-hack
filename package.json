@@ -1,0 +1,22 @@
+{
+  "name": "hackdavis",
+  "version": "1.0.0",
+  "description": "hackdavis",
+  "main": "test.js",
+  "dependencies": {
+    "body-parser": "^1.16.0",
+    "ejs": "^2.5.5",
+    "express": "^4.14.0",
+    "express-session": "^1.14.2",
+    "mongoose": "^4.7.7",
+    "mysql": "^2.12.0",
+    "sequelize": "^3.29.0",
+    "yelp": "^1.0.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
