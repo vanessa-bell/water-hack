@@ -1,93 +1,163 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Water Stores Near You</title>
-	<script src="/css/foundation/js/vendor/jquery.js"></script>
-	<script src="/css/foundation/js/vendor/what-input.js"></script>
-		<!-- Compressed CSS -->
-	<script src="/css/foundation/js/vendor/foundation.min.js"></script>
+<% include userheader %>
+<input type="hidden" id="sessionLat" value="<%=lat%>">
+<input type="hidden" id="sessionLong" value="<%=long%>">
+<link rel="icon" type="image/png" href="/images/water.png">
+<link rel="stylesheet" type="text/css" href="/css/styles.css">
+<link rel="stylesheet" type="text/css" href="/css/custom.css">
+<style>
+.results {
+	margin-top:10%;
+}
+#map {
+	width: 500px;
+}
 
-	<!-- Compressed JavaScript -->
-	<link rel="stylesheet" href="/css/foundation/css/foundation.min.css">
-	
-	<link rel="icon" type="image/png" href="/images/water.png">
+.table-striped>tbody>tr:nth-of-type(even) {
+    background-color: #FFFFFF;
+}
 
-	<link rel="stylesheet" type="text/css" href="/css/styles.css">
-	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAxWzXGc9oLo60oyxaiuOaqnFOkpnX5lsI&libraries=places"></script>
-
-
-</head>
-<body>
-		<div class="container">
-		<!-- nav -->
-			<div class="top-bar">
-    			<div id="responsive-menu">
-			      <div class="top-bar-left">
-			        <ul class="menu">
-			         <li class="menu-text"><a href="/"><img src="/images/smalllogo.png"/></a></li>
-			          <li><a href="#">Water Quality</a></li>
-					  <li><a href="#">Board Meetings</a></li>
-					  <li class="show-for-medium"><a href="#">Get Involved</a></li>
-			      </ul>
-			      </div> <!-- end .top-bar-left-->
-			      
-		    </div> <!-- end #responseive-menu-->
-			</div> <!-- end .top-bar -->
-
-			
-				<h1 class="text-center">Where to Buy Water</h1><p class="text-center">in <span id="current-location">Davis, CA</span> (<a href="">change location?</a>)</p>
-			<div id="main" class="row">
-				<!-- store results -->
-				<div id="results-wrapper" class="small-6 columns">
-					
-					<div class="store-result">
-					<% for (var x in stores) { %>
-						<img class="inline small-2 columns" src="<%= stores[x].image_url%>">
-						<div class="store-info inline">
-					        <h3 class="store-info small-12 columns"><%= stores[x].id %>.<a href="<%= stores[x].url%>" target="_blank"> <%= stores[x].name %></a></h3>
-					        
-					        <% if(stores[x].is_closed){ %>
-								<h6 class="closed">Closed Now
-								   </h6>
-							<% } else{ %>  
-								<h6 class="open">Open Now</h6>
-							<% } %>
-							
-						</div>
-				        <div class="small-12 columns">
-					        <img class="rating-img" src="<%= stores[x].rating%>">
-					      	<p class="inline"><%= stores[x].review_count %> reviews</p>
-					      	<p class="phone">Phone: <%= stores[x].display_phone %></p>
-					   
-							<p class="address"><%= stores[x].address[0] %></p>
-							<p class="address"><%= stores[x].address[1] %></p>
-							<% if(stores[x].address[2]){ %>
-							 <%= stores[x].address[2] %>
-							<% } %>
-						</div>	
-						<div class="small-12 columns">
-						<br>
-							<p class="inline"><%= stores[x].snippet_text %>&nbsp;<a href="<%= stores[x].url%>" target="_blank">Read&nbsp;More</a></p>
-								<a href="<%= stores[x].url%>"><img class="yelp" src="/images/Yelp_trademark_RGB.png"></a>
-					    </div> <!-- end .rating -->  
-				        
-				        <hr>
-				    <% } %>
-					</div>  <!-- end store-result -->                                         
-				</div> <!-- end results-wrapper -->
-				<div id="map" class="small-6 columns">
-				<% for (var x in stores) { %>
-					<h3 class="inline"><%= stores[x].id %>.<a href="<%= stores[x].url%>" target="_blank"> <%= stores[x].name %></a></h3>
-
-					latitude: <%= stores[x].coordinate.latitude %>
-					longitude: <%= stores[x].coordinate.longitude%>
-					<br>
-				<% } %>
+</style>
+<div class="container">
+<input id="latitude" type="hidden">
+<input id="longitude" type="hidden">
+		<div class="container results">
+			<div class="row">
+				<div class="col-xs-8">
+					<ul class="nav nav-tabs" role="tablist">
+				    <li role="presentation" class="active"><a href="#free" aria-controls="free" role="tab" data-toggle="tab">Free Water</a></li>
+				    <li role="presentation"><a href="#purchase" aria-controls="purchase" role="tab" data-toggle="tab">Purchase Water</a></li>
+				  	</ul>
+					  <!-- Tab panes -->
+					  <div class="tab-content">
+						    <div role="tabpanel" class="tab-pane active" id="free">	
+						    	<table class="freeResultsTable table table-responsive table-striped">
+									<tbody>
+									</tbody>
+								</table>
+						    </div>
+						    <div role="tabpanel" class="tab-pane" id="purchase">
+					    		<table class="paidResultsTable table table-responsive table-striped">
+									<tbody>
+									</tbody>
+								</table>
+						    </div>
+					  </div>
 				</div>
-			</div> <!-- end row -->
-			
-			
-		</div> 
+				<div class="col-xs-4">
 		
+			  			<div id="map"></div>
+				</div>
+			</div>
+		</div> 
+		</div>
 	</body>
+	<script type="text/javascript">
+
+		window.onload = function() {
+		  var startPos;
+		  var geoSuccess = function(position) {
+		    startPos = position;
+		    console.log(position);
+		    document.getElementById('latitude').innerHTML = startPos.coords.latitude;
+		    document.getElementById('longitude').innerHTML = startPos.coords.longitude;
+		    // initMap();
+		  };
+		  navigator.geolocation.getCurrentPosition(geoSuccess);
+
+		};
+		
+		function initMap() {
+
+      	var myCity = $("#startCity").val();
+		var myState = $("#startState").val()
+		var myLat = parseFloat($("#sessionLong").val())
+		var myLong = parseFloat($("#sessionLat").val())
+		console.log("CITYSTATE");
+		// console.log(myCity);
+		// console.log(myState);
+		console.log(myLat);
+		console.log(myLong);
+        var uluru = {lat: myLat, lng: myLong};
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 10,
+          center: uluru
+        });
+        var infowindow = null;
+		/* now inside your initialise function */
+		infowindow = new google.maps.InfoWindow({
+		content: "holding..."
+		});
+
+		
+        $.ajax({
+		  method: "POST",
+		  url: "/ajax/stores",
+		  data: { latitude: myLat, longitude: myLong }
+		})
+		  .done(function( msg ) 
+		  {
+		  	console.log(msg);
+		  	for (x in msg)
+		  	{
+		  		var latLng = new google.maps.LatLng(msg[x].coordinate.latitude,msg[x].coordinate.longitude);
+		          var marker = new google.maps.Marker({
+		            position: latLng,
+		            map: map,
+		            title: msg[x].name,
+		            info: msg[x].name,
+		            html: "<h4>"+msg[x].name+"</h4>"
+		    	})		// console.log(msg)
+		  	
+			  	google.maps.event.addListener(marker, 'click', function () {
+				// where I have added .html to the marker object.
+				infowindow.setContent(this.html);
+				infowindow.open(map, this);
+				});
+				 $(".paidResultsTable").append("<tr><td><img src='"+msg[x].image_url+"'></td><td>"+msg[x].name+"</td></tr>")
+			}
+			$.ajax({
+			  method: "POST",
+			  url: "/ajax/freePoints",
+			  data: { latitude: 38.5353621, longitude: -121.7463266 }
+			}).done(function( freepoints ) 
+		  {
+		  	console.log(freepoints)
+		  	 var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
+		  	var pinColor = "#00BF2E";
+    		var pinImage = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + pinColor,
+		        new google.maps.Size(21, 34),
+		        new google.maps.Point(0,0),
+		        new google.maps.Point(10, 34));
+		    var pinShadow = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_shadow",
+		        new google.maps.Size(40, 37),
+		        new google.maps.Point(0, 0),
+		        new google.maps.Point(12, 35));
+		   
+		  	for (y in freepoints)
+		  	{
+		  		var latLng = new google.maps.LatLng(freepoints[y].long,freepoints[y].lat);
+		          var marker = new google.maps.Marker({
+		            position: latLng,
+		            map: map,
+		            title: freepoints[y].waterpoint_name,
+		            info: freepoints[y].waterpoint_name,
+		            html: "<h4>"+freepoints[y].waterpoint_name+"</h4>",
+		            icon: '/images/free_marker.png'
+                	
+		    	})		// console.log(msg)
+		  	
+			  	google.maps.event.addListener(marker, 'click', function () {
+				// where I have added .html to the marker object.
+				infowindow.setContent(this.html);
+				infowindow.open(map, this);
+				});
+				$(".freeResultsTable").append("<tr><td></td><td>"+freepoints[y].waterpoint_name+"</td></tr>")
+			}
+		  })
+		});
+    }
+	</script>
+	 <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAxWzXGc9oLo60oyxaiuOaqnFOkpnX5lsI&callback=initMap">
+    </script>
 </html>

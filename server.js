@@ -9,6 +9,8 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 app.use(session({secret: 'codingdojorocks'}));  
 
+
+
 app.use(function(request, response, next){
     // if there's a flash message in the session request, make it available in the response, then delete it
     response.locals.sessionFlash = request.session.sessionFlash;

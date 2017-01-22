@@ -3,6 +3,31 @@
 	opacity: 0.8;
 }
 
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
+    color: #555;
+    cursor: default;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-bottom-color: transparent;
+    border-radius: 0px;
+}
+
+.nav-tabs {
+    border-bottom: 1px solid #ddd;
+    background-color: rgba(255, 255, 255, 0.7);
+    }
+    .nav-tabs>li>a {
+    	border-radius: 0;
+    }
+
+    .nav-tabs>li>a:hover{
+    margin-right: 2px;
+    line-height: 1.42857143;
+    border: 1px solid transparent;
+    border-radius: 0;
+    background-color:white;
+}
+
 .toprow {
 	margin-top:10%;
 }
@@ -58,7 +83,8 @@
 
 }
 .background-container {
-	background-image:url('/images/drinkingwaterbg.jpg');
+	min-height:1200px;
+	background-image:url('/images/clean-water2.jpg');
 	background-position: center;
 	background-size: cover;
 
@@ -124,11 +150,11 @@
 }
 
 .special:active {
-	border-top: 1px solid green;
+	border-top: 1px solid #2693FF;
 }
 
 .active {
-	border-top: 2px solid green;
+	border-top: 2px solid #2693FF;
 	background-color:none;
 }
 }

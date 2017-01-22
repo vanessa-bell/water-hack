@@ -1,49 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title></title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="/css/foundation/js/vendor/jquery.js"></script>
-
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAxWzXGc9oLo60oyxaiuOaqnFOkpnX5lsI&libraries=places"></script>
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<link rel="stylesheet" type="text/css" href="/css/custom.css">
-</head>
-	<body>
-		<div class="container-fluid background-container">
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#"> <img style="max-height:100px;" alt="careOn" src="/images/logo2.png"/></a>
-    </div>
-    <!-- Collect the nav links, forms, and other content for toggling -->
-		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-		      <ul class="nav navbar-nav">
-		          <li class=""><a href="#">Search Water Quality<span class="sr-only">(current)</span></a></li>
-				  <li><a href="#">Volunteer</a></li>
-				  <li class="show-for-medium"><a href="#">How it works</a></li>
-		      </ul>
-		      <ul class="nav navbar-nav navbar-right">
-		        <li><a href="#">Welcome Michael</a></li>
-		        <li><a href="#">Logout</a></li>
-		      </ul>
-		    </div><!-- /.navbar-collapse -->
-		  </div><!-- /.container-fluid -->
-		</nav>
+<% include userheader %>
+<input type="hidden" id="sessionLat" value="<%=longitude%>">
+<input type="hidden" id="sessionLong" value="<%=latitude%>">
 		<div class="container">
 			<div class="row toprow">
 				<div class="col-xs-12 col-md-4">
@@ -74,7 +31,7 @@
 						  </div>
 						<div class="col-xs-6">
 						    
-						  <a href="/waterpoints">See Full List</a> <a href="/waterpoint/new" class="pull-right">Add Free Water Point</a>
+						  <a id="seeAllStores">See Full List</a> <a href="/waterpoint/new" class="pull-right">Add Free Water Point</a>
 						</div>
 					  </div>
 					  <div class="panel-body">
@@ -84,35 +41,61 @@
 					  </div>
 					</div>
 				</div>
-				<!-- <div class="col-xs-12 col-md-4">
-					<div class="panel panel-default boxy">
-					  <div class="panel-heading">
-					    <h3 class="panel-title">Water Quantity</h3>
-					  </div>
-					  <div class="panel-body">
-					    Panel content
-					  </div>
-					</div> -->
 				</div>
-				<!-- <div class="col-xs-12 col-md-3">
-					<div class="panel panel-default boxy">
-					  <div class="panel-heading">
-					    <h3 class="panel-title">Water Cost</h3>
-					  </div>
-					  <div class="panel-body">
-					    Panel content
-					  </div>
-					</div>
-				</div> -->
-			<!-- </div> -->
 			<div class="row">
 				<div class="col-xs-12 col-md-4">
 					<div class="panel panel-default boxy">
 					  <div class="panel-heading">
-					    <h3 class="panel-title">Water Board</h3>
+					 	 <div class="row">
+					 	 	<div class="col-xs-9">
+					    		<h3 class="panel-title">Upcoming Water Board Meetings</h3>
+					    	</div>
+					    	<div class="col-xs-3">
+					    	<a class="pull-right" href="waterboard/events">See All</a>
+					    	</div>
+					    </div>
 					  </div>
 					  <div class="panel-body">
-					    Panel content
+					  <table class="table table-responsive table-striped">
+						   <thead>
+						    	<th>Date</th>
+						    	<th>Topic</th>
+						    	<th>Program</th>
+						    </thead>
+						    <tbody>
+							    <tr>
+							    	<td>Jan 23</td>
+							    	<td>Public Scoping Meeting: Statewide Water Quality Standards Variance Policy</td>
+							    	<td><a href="http://www.swrcb.ca.gov/bacterialobjectives/docs/notice_variance_policy.pdf">Notice</a></td>
+							    	
+							    </tr>
+							    <tr>
+							    	<td>Jan 23</td>
+							    	<td>Closed Session Meeting: California WaterFix</td>
+							    	<td><a href="http://www.waterboards.ca.gov/waterrights/water_issues/programs/bay_delta/california_waterfix/">Program</a></td>
+							    	
+							    </tr>
+							    <tr>
+							    	<td>Jan 30</td>
+							    	<td>Closed Session Meeting: California WaterFix</td>
+							    	<td><a href="http://www.waterboards.ca.gov/waterrights/water_issues/programs/bay_delta/california_waterfix/">Program</a></td>
+							    	
+							    </tr>
+							   
+							    <tr>
+							    	<td>Feb 1</td>
+							    	<td>Staff Workshop: Relationship between Instream Flows and the Proposed Beneficial Uses</td>
+							    	<td><a href="http://www.waterboards.ca.gov/water_issues/programs/mercury/">Program</a></td>
+							    	
+							    </tr>
+							     <tr>
+							    	<td>Feb 7</td>
+							    	<td>Board Meeting</td>
+							    	<td></td>
+							    	
+							    </tr>
+						    </tbody>
+					    </table>
 					  </div>
 					</div>
 				</div>
@@ -138,11 +121,8 @@
 				</div>
 			</div>
 		</div>
-
 		<input type="hidden" id="startLat" name="startLat">
 		<input type="hidden" id="startLon" name="startLon">
-		<!-- <input type="hidden" id="startCity" name="startCity" value="<%=city%>">
-		<input type="hidden" id="startState" name="startState" value="<%=state%>"> -->
 		<input type="hidden" id="latitude" name="latitude" value="<%=latitude%>">
 		<input type="hidden" id="longitude" name="longitude" value="<%=longitude%>">
 	</body>
@@ -244,15 +224,14 @@ var autocomplete = new google.maps.places.Autocomplete(input,options)
 
       	var myCity = $("#startCity").val();
 		var myState = $("#startState").val()
-		var myLat = parseFloat($("#latitude").val())
-		var myLong = parseFloat($("#longitude").val())
+		var myLat = parseFloat($("#sessionLat").val())
+		var myLong = parseFloat($("#sessionLong").val())
 		console.log("CITYSTATE");
-		console.log(myCity);
-		console.log(myState);
+		// console.log(myCity);
+		// console.log(myState);
 		console.log(myLat);
 		console.log(myLong);
-
-        var uluru = {lat: myLong, lng: myLat};
+        var uluru = {lat: myLat, lng: myLong};
         var map = new google.maps.Map(document.getElementById('map'), {
           zoom: 10,
           center: uluru
@@ -269,7 +248,7 @@ var autocomplete = new google.maps.places.Autocomplete(input,options)
         $.ajax({
 		  method: "POST",
 		  url: "/ajax/stores",
-		  data: { latitude: myLong, longitude: myLat }
+		  data: { latitude: myLat, longitude: myLong }
 		})
 		  .done(function( msg ) 
 		  {
@@ -291,6 +270,43 @@ var autocomplete = new google.maps.places.Autocomplete(input,options)
 				infowindow.open(map, this);
 				});
 			}
+			$.ajax({
+			  method: "POST",
+			  url: "/ajax/freePoints",
+			  data: { latitude: myLong, longitude: myLat }
+			}).done(function( freepoints ) 
+		  {
+		  	console.log(freepoints)
+		  	 var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
+		  	var pinColor = "#00BF2E";
+    		var pinImage = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + pinColor,
+		        new google.maps.Size(21, 34),
+		        new google.maps.Point(0,0),
+		        new google.maps.Point(10, 34));
+		    var pinShadow = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_shadow",
+		        new google.maps.Size(40, 37),
+		        new google.maps.Point(0, 0),
+		        new google.maps.Point(12, 35));
+		  	for (y in freepoints)
+		  	{
+		  		var latLng = new google.maps.LatLng(freepoints[y].long,freepoints[y].lat);
+		          var marker = new google.maps.Marker({
+		            position: latLng,
+		            map: map,
+		            title: freepoints[y].waterpoint_name,
+		            info: freepoints[y].waterpoint_name,
+		            html: "<h3>"+freepoints[y].waterpoint_name+"</h3>",
+		            icon: '/images/free_marker.png'
+                	
+		    	})		// console.log(msg)
+		  	
+			  	google.maps.event.addListener(marker, 'click', function () {
+				// where I have added .html to the marker object.
+				infowindow.setContent(this.html);
+				infowindow.open(map, this);
+				});
+			}
+		  })
 		});
     }
 

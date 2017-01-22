@@ -2,7 +2,6 @@ module.exports = {
 	// Yelp API js library
 	search: function(request, response){
 		var Yelp = require('yelp');
-
 		var yelp = new Yelp({
 		  consumer_key: 'hbOu-quny8ncYVJznM4Alg',
 		  consumer_secret: 'PT_AIp2myr9xhksTndfhAOeK59Q',
@@ -11,7 +10,7 @@ module.exports = {
 		});
 
 		// See http://www.yelp.com/developers/documentation/v2/search_api
-		yelp.search({ term: 'water refill', ll: request.body.latitude+","+request.body.longitude, limit: '10', category_filter: 'grocery,convenience' })
+		yelp.search({ term: 'water refill', ll: request.body.latitude+","+request.body.longitude, limit: '8', category_filter: 'grocery,convenience' })
 		.then(function (data) {
 		  var businesses = data['businesses'];
 		  var locations=[];
@@ -21,12 +20,7 @@ module.exports = {
 
 		  // console.log(locations);
 		  // return locations;
-		  if(request.url =='/stores'){
-		  response.render('waterStores', {stores:locations});
-			}
-		  else if(request.url =='/ajax/stores'){
-		  	response.json(locations)
-		  }
+			response.json(locations)
 		})
 		.catch(function (err) {
 		  console.error(err);
