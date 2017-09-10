@@ -5,35 +5,39 @@
 	font-weight: 600;
 }
 </style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <input type="hidden" id="latitude" value="">
 <input type="hidden" id="longitude" value="">
-<div class="container">
+<!-- <div class="container-fluid"> -->
 	<div class="row toprow">
-		<div class="col-xs-12 col-md-6">
+		<div id="instructionArea">
+						</div>
+		<div class="col-xs-12 col-sm-12 col-md-6">
 			<div class="panel panel-default boxy status">
 				<div class="panel-heading">
 					<div class="row">
-						<div class="col-xs-4">
+						
+						<div class="col-xs-12 col-sm-4">
 							<h3 class="panel-title">
 								Alerts in your area
 							</h3>
 							</div>
-							<div class="col-xs-3">
+							<div class="col-xs-12 col-sm-3">
 							<img id="loading" class="pull-right" src="/images/loading.gif" style="max-width:40px;">
 							</div>
 						
-						<div class="col-xs-5">
+						<div class="col-xs-hidden col-sm-5">
 							<a href="#" class="pull-right">Full Report
 							</a>
 						</div>
 					</div>
 				</div>
 				<div class="panel-body">
-				<table id="alertTable" class="table table-responsive striped">
+				<table id="alertTable" class="table table-responsive table-striped">
 					<thead>
 						<th>Event</th>
-						<th>Area</th>
-						<th>Details</th>
+						<!-- <th>Area</th> -->
+						<th>Details / Instructions</th>
 					</thead>
 					<tbody>
 						
@@ -73,8 +77,28 @@
 		</div>
 	</div>
 </div>
+<!-- Modal -->
+<div class="modal fade" id="alertModal" tabindex="-1" role="dialog" aria-labelledby="alertModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="alertModalTitle">Alert Details</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <!-- <button type="button" class="btn btn-primary">Acknowledge</button> -->
+      </div>
+    </div>
+  </div>
+</div>
 <script>
 window.onload = function() {
+		  var alertData = [];
 		  var startPos;
 		  var geoSuccess = function(position) {
 		    startPos = position;
@@ -114,10 +138,56 @@ window.onload = function() {
 			  console.log(response);
 			  $("#loading").hide();
 			  for (x in response.features){
-			  	$("#alertTable").append("<tr><td class='red'>"+response.features[x].properties.event+"</td><td>"+response.features[x].properties.areaDesc+"</td><td><a href='#'>Details</a></td></tr>");
-			  }
+			  	// if(response.features[x].properties.instruction 
+			  	// 	!= undefined){
+			  	// 	$('#instructionArea').append("<div class='alert alert-danger'>"+response.features[x].properties.instruction+"</div>");
+
+			  	// }
+			  	$("#alertTable").append("<tr id="+response.features[x].properties.id+"><td class='red'>"+response.features[x].properties.event+"</td><td><a href='#' class='modaler' data-clickerID='"+response.features[x].properties.id+"' data-toggle='modal' data-target='#alertModal'>Details</a></td></tr>");
+			  	 alertData.push(response.features[x].properties);
+
+			  }	
+			  console.log(alertData[0]);
+
 			});
 		}
+		$('#alertModal').on('show.bs.modal', function (e) {
+			console.log(e.relatedTarget.dataset.clickerid);
+		  // if (!data) return e.preventDefault() // stops modal from being shown
+		  console.log('yasss');
+		  var settings = {
+			  "async": true,
+			  "crossDomain": true,
+			  "url": 
+			  "https://api.weather.gov/alerts/"+e.relatedTarget.dataset.clickerid,
+			  "method": "GET",
+			  // "headers": {
+			  //   "cache-control": "no-cache",
+			  //   "postman-token": "4a78a11d-ffc8-d114-89c4-348b4d9d4932"
+			  // }
+			}
+			$.ajax(settings).done(function (response) {
+			  // console.log(response);
+			  // $("#loading").hide();
+			  // for (x in response.features){
+			  	// if(response.features[x].properties.instruction 
+			  	// 	!= undefined){
+			  	// 	$('#instructionArea').append("<div class='alert alert-danger'>"+response.features[x].properties.instruction+"</div>");
+
+			  	// }
+			  	$(".modal-body").html("<p>"+response.properties.areaDesc+"</p><p>"+response.properties.instruction+"</p><p>"+response.properties.description+"</p>");
+			  // }	
+			  console.log(alertData[0]);
+
+			});
+		})
 	}
+	$(document).ready(function(){
+		console.log('ready');
+		$('.modaler').click(function(){
+			console.log( this ).data('clickerID');
+		})
+
+	})
 		  
 </script>

@@ -1,3 +1,17 @@
+.nav {
+	margin-top:3%;
+	font-size: 15px;
+
+}
+.background-container {
+	background-image: url('/images/drinking_water_bg.jpg');
+	background-position: center;
+	background-size: cover;
+}
+.user {
+	font-weight: 900;
+}
+
 #chart_div{
 	margin-left:15%;
 	opacity: 0.8;
@@ -185,10 +199,26 @@
   .no-js .title-bar {
     display: none;
   }
+  .navbar-brand {
+		padding: none !important;
+	}
 }
 
 @media screen and(max-width: 420px) {
 	.special {
-		margin-left:2%;
+		margin-left:1%;
 	}
+	.navbar-brand {
+		padding: 0px !important;
+	}
+@media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 480px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+  	.navbar-brand {
+		padding: 0px !important;
+	}
+}
+
+
 }

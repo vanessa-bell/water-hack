@@ -20,20 +20,22 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAxWzXGc9oLo60oyxaiuOaqnFOkpnX5lsI&libraries=places"></script>
 <link rel="stylesheet" type="text/css" href="/css/custom.css">
-<style>
-.nav {
-	margin-top:3%;
-	font-size: 15px;
-
+<style type="text/css">
+	@media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 480px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+  	.navbar-brand {
+		padding: 0px !important;
+	}
+	.container-fluid>.navbar-collapse, .container-fluid>.navbar-header, .container>.navbar-collapse, .container>.navbar-header {
+    margin-right: -15px;
+    margin-left: -55px;
 }
-.background-container {
-	background-image: url('/images/drinking_water_bg.jpg');
-	background-position: center;
-	background-size: cover;
-}
-.user {
-	font-weight: 900;
-}
+	.headerlogo {
+		max-height: 80px !important;
+	}
+	}
 </style>
 </head>
 <body>
@@ -48,7 +50,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#"> <img style="max-height:100px;" alt="careOn" src="/images/logo2.png"/></a>
+      <a class="navbar-brand" href="#"> <img class="headerlogo" alt="careOn" src="/images/logo2.png"/></a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->

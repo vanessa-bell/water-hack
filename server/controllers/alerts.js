@@ -11,10 +11,10 @@ module.exports = {
       "method": "GET",
       "hostname": "api.weather.gov",
       "port": null,
-      "path": "/alerts?active=1&points=25.8566%2C-80.12",
+      "path": "/alerts?active=1&points=25.8566,-80.12",
       "headers": {
-        "cache-control": "no-cache",
-        "postman-token": "548e6547-18b4-0f17-d2d9-05c3ad194af8",
+        // "cache-control": "no-cache",
+        // "postman-token": "548e6547-18b4-0f17-d2d9-05c3ad194af8",
         "User-Agent": "node-http/0.9.5"
       }
     };
@@ -31,7 +31,7 @@ module.exports = {
       res.on("end", function () {
         var body = Buffer.concat(chunks);
         console.log(body.toString());
-        response.json(body.toString());
+        // response.json(body.toString());
       });
     });
 
