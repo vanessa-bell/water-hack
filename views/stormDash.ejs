@@ -106,8 +106,13 @@ window.onload = function() {
 		    document.getElementById('latitude').value = startPos.coords.latitude;
 		    document.getElementById('longitude').value = startPos.coords.longitude;
 		    // initMap();
+<<<<<<< HEAD
 		    // getWeatherData(startPos.coords.latitude,startPos.coords.longitude);
 		    getWeatherData(25.856645,-80.119999);
+=======
+		    getWeatherData(startPos.coords.latitude,startPos.coords.longitude);
+		    // getWeatherData(25.856645,-80.119999);
+>>>>>>> michael
 		  };
 		  navigator.geolocation.getCurrentPosition(geoSuccess);
 
@@ -175,7 +180,11 @@ window.onload = function() {
 			  	// 	$('#instructionArea').append("<div class='alert alert-danger'>"+response.features[x].properties.instruction+"</div>");
 
 			  	// }
+<<<<<<< HEAD
 			  	$(".modal-body").html("<p>"+response.properties.areaDesc+"</p><p><b>"+response.properties.instruction+"</b></p><p>"+response.properties.description+"</p>");
+=======
+			  	$(".modal-body").html("<p>"+response.properties.areaDesc+"</p><p>"+response.properties.instruction+"</p><p>"+response.properties.description+"</p>");
+>>>>>>> michael
 			  // }	
 			  console.log(alertData[0]);
 

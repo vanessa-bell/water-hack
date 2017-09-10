@@ -1,6 +1,45 @@
+.nav {
+	margin-top:3%;
+	font-size: 15px;
+
+}
+.background-container {
+	background-image: url('/images/drinking_water_bg.jpg');
+	background-position: center;
+	background-size: cover;
+}
+.user {
+	font-weight: 900;
+}
+
 #chart_div{
 	margin-left:15%;
 	opacity: 0.8;
+}
+
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
+    color: #555;
+    cursor: default;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-bottom-color: transparent;
+    border-radius: 0px;
+}
+
+.nav-tabs {
+    border-bottom: 1px solid #ddd;
+    background-color: rgba(255, 255, 255, 0.7);
+    }
+    .nav-tabs>li>a {
+    	border-radius: 0;
+    }
+
+    .nav-tabs>li>a:hover{
+    margin-right: 2px;
+    line-height: 1.42857143;
+    border: 1px solid transparent;
+    border-radius: 0;
+    background-color:white;
 }
 
 .toprow {
@@ -13,7 +52,7 @@
        }
 
 .status {
-	height:300px;
+	/*height:300px;*/
 }
 .panel {
 	background-color: rgba(255, 255, 255, 0.5)
@@ -58,7 +97,8 @@
 
 }
 .background-container {
-	background-image:url('/images/drinkingwaterbg.jpg');
+	min-height:1200px;
+	background-image:url('/images/clean-water2.jpg');
 	background-position: center;
 	background-size: cover;
 
@@ -124,11 +164,11 @@
 }
 
 .special:active {
-	border-top: 1px solid green;
+	border-top: 1px solid #2693FF;
 }
 
 .active {
-	border-top: 2px solid green;
+	border-top: 2px solid #2693FF;
 	background-color:none;
 }
 }
@@ -159,10 +199,26 @@
   .no-js .title-bar {
     display: none;
   }
+  .navbar-brand {
+		padding: none !important;
+	}
 }
 
 @media screen and(max-width: 420px) {
 	.special {
-		margin-left:2%;
+		margin-left:1%;
 	}
+	.navbar-brand {
+		padding: 0px !important;
+	}
+@media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 480px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+  	.navbar-brand {
+		padding: 0px !important;
+	}
+}
+
+
 }
