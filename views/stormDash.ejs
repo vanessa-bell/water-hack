@@ -106,8 +106,8 @@ window.onload = function() {
 		    document.getElementById('latitude').value = startPos.coords.latitude;
 		    document.getElementById('longitude').value = startPos.coords.longitude;
 		    // initMap();
-		    // getWeatherData(startPos.coords.latitude,startPos.coords.longitude);
-		    getWeatherData(25.856645,-80.119999);
+		    getWeatherData(startPos.coords.latitude,startPos.coords.longitude);
+		    // getWeatherData(25.856645,-80.119999);
 		  };
 		  navigator.geolocation.getCurrentPosition(geoSuccess);
 
