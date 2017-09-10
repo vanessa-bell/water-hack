@@ -12,10 +12,8 @@ module.exports = function(app){
     // hard-coded user data
 	    // users.all(request,response)
 	    // users.all(request,response);
-<<<<<<< HEAD
-=======
+
 	    // alerts.all(request,response);
->>>>>>> michael
 	    response.render('stormDash')
 		    
 	})
