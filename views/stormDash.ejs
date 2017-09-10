@@ -1,0 +1,123 @@
+<% include userheader %>
+<style>
+.red {
+	
+	font-weight: 600;
+}
+</style>
+<input type="hidden" id="latitude" value="">
+<input type="hidden" id="longitude" value="">
+<div class="container">
+	<div class="row toprow">
+		<div class="col-xs-12 col-md-6">
+			<div class="panel panel-default boxy status">
+				<div class="panel-heading">
+					<div class="row">
+						<div class="col-xs-4">
+							<h3 class="panel-title">
+								Alerts in your area
+							</h3>
+							</div>
+							<div class="col-xs-3">
+							<img id="loading" class="pull-right" src="/images/loading.gif" style="max-width:40px;">
+							</div>
+						
+						<div class="col-xs-5">
+							<a href="#" class="pull-right">Full Report
+							</a>
+						</div>
+					</div>
+				</div>
+				<div class="panel-body">
+				<table id="alertTable" class="table table-responsive striped">
+					<thead>
+						<th>Event</th>
+						<th>Area</th>
+						<th>Details</th>
+					</thead>
+					<tbody>
+						
+					</tbody>
+				</table>
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-12 col-md-6">
+			<!-- <div class="col-xs-8"> -->
+				<div class="panel panel-default boxy status">
+			<div class="panel-heading">
+			<h3 class="panel-title"> Resources In Your Area</h3>
+			</div>
+				<ul class="nav nav-tabs" role="tablist">
+				    <li role="presentation" class="active"><a href="#free" aria-controls="free" role="tab" data-toggle="tab">Free Water</a></li>
+				    <li role="presentation"><a href="#purchase" aria-controls="purchase" role="tab" data-toggle="tab">Purchase Water</a></li>
+				    <li role="presentation"><a href="#purchase" aria-controls="purchase" role="tab" data-toggle="tab">Gas Stations</a></li>
+				    <li role="presentation"><a href="#purchase" aria-controls="purchase" role="tab" data-toggle="tab">Storm Shelters</a></li>
+				  </ul>
+					  <!-- Tab panes -->
+				<div class="tab-content">
+				    <div role="tabpanel" class="tab-pane active" id="free">	
+				    	<table class="freeResultsTable table table-responsive table-striped">
+							<tbody>
+							</tbody>
+						</table>
+				    </div>
+				    <div role="tabpanel" class="tab-pane" id="purchase">
+			    		<table class="paidResultsTable table table-responsive table-striped">
+							<tbody>
+							</tbody>
+						</table>
+				    </div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+window.onload = function() {
+		  var startPos;
+		  var geoSuccess = function(position) {
+		    startPos = position;
+		    console.log(position);
+		    document.getElementById('latitude').value = startPos.coords.latitude;
+		    document.getElementById('longitude').value = startPos.coords.longitude;
+		    // initMap();
+		    // getWeatherData(startPos.coords.latitude,startPos.coords.longitude);
+		    getWeatherData(25.856645,-80.119999);
+		  };
+		  navigator.geolocation.getCurrentPosition(geoSuccess);
+
+		  // once we have geo success let's go get some datas
+		//   function getWeatherData(latitude,longitude){
+		//   	$.ajax({
+		// 	  method: "POST",
+		// 	  url: "/ajax/stormDash",
+		// 	  data: { latitude: latitude, longitude: longitude }
+		// 	}).done(function( information ){
+		// 		console.log(information);
+		// 	});
+		// }
+		function getWeatherData(latitude,longitude){
+			var settings = {
+			  "async": true,
+			  "crossDomain": true,
+			  "url": 
+			  "https://api.weather.gov/alerts?active=1&point="+latitude+","+longitude,
+			  "method": "GET",
+			  // "headers": {
+			  //   "cache-control": "no-cache",
+			  //   "postman-token": "4a78a11d-ffc8-d114-89c4-348b4d9d4932"
+			  // }
+			}
+
+			$.ajax(settings).done(function (response) {
+			  console.log(response);
+			  $("#loading").hide();
+			  for (x in response.features){
+			  	$("#alertTable").append("<tr><td class='red'>"+response.features[x].properties.event+"</td><td>"+response.features[x].properties.areaDesc+"</td><td><a href='#'>Details</a></td></tr>");
+			  }
+			});
+		}
+	}
+		  
+</script>

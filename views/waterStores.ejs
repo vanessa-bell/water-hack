@@ -1,6 +1,8 @@
 <% include userheader %>
-<input type="hidden" id="sessionLat" value="<%=lat%>">
-<input type="hidden" id="sessionLong" value="<%=long%>">
+<!-- <input type="hidden" id="sessionLat" value="<%=lat%>">
+<input type="hidden" id="sessionLong" value="<%=long%>"> -->
+<input id="latitude" type="hidden" value="">
+<input id="longitude" type="hidden" value="">
 <link rel="icon" type="image/png" href="/images/water.png">
 <link rel="stylesheet" type="text/css" href="/css/styles.css">
 <link rel="stylesheet" type="text/css" href="/css/custom.css">
@@ -18,8 +20,7 @@
 
 </style>
 <div class="container">
-<input id="latitude" type="hidden">
-<input id="longitude" type="hidden">
+
 		<div class="container results">
 			<div class="row">
 				<div class="col-xs-8">
@@ -58,21 +59,23 @@
 		  var geoSuccess = function(position) {
 		    startPos = position;
 		    console.log(position);
-		    document.getElementById('latitude').innerHTML = startPos.coords.latitude;
-		    document.getElementById('longitude').innerHTML = startPos.coords.longitude;
-		    // initMap();
+		    document.getElementById('latitude').value = startPos.coords.latitude;
+		    document.getElementById('longitude').value = startPos.coords.longitude;
+		    initMap(startPos.coords.latitude,startPos.coords.longitude);
 		  };
 		  navigator.geolocation.getCurrentPosition(geoSuccess);
 
 		};
 		
-		function initMap() {
+		function initMap(latitude,longitude) {
 
-      	var myCity = $("#startCity").val();
-		var myState = $("#startState").val()
-		var myLat = parseFloat($("#sessionLong").val())
-		var myLong = parseFloat($("#sessionLat").val())
-		console.log("CITYSTATE");
+  //     	var myCity = $("#startCity").val();
+		// var myState = $("#startState").val()
+		// var myLat = parseFloat($("#latitude").val())
+		var myLat = latitude;
+		// var myLong = parseFloat($("#longitude").val())
+		var myLong = longitude;
+		// console.log("CITYSTATE");
 		// console.log(myCity);
 		// console.log(myState);
 		console.log(myLat);

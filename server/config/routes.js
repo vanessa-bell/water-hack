@@ -5,13 +5,14 @@ var users = require('../controllers/users.js');
 var stores = require('../controllers/stores.js');
 var waterpoints = require('../controllers/waterpoints.js');
 var yelper = require('../controllers/yelp.js');
+var alerts = require('../controllers/alerts.js');
 // var stores = require('../controllers/stores.js');
 module.exports = function(app){
 	app.get("/", function (request, response){
     // hard-coded user data
 	    // users.all(request,response)
 	    // users.all(request,response);
-	    response.render('index')
+	    response.render('stormDash')
 		    
 	})
 
@@ -65,5 +66,9 @@ module.exports = function(app){
 
 	app.post("/ajax/freePoints",function(request,response){
 		waterpoints.all(request,response);
+	})
+
+	app.post("/ajax/stormDash",function(request,response){
+		alerts.all(request,response);
 	})
 }
