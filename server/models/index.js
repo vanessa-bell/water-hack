@@ -10,8 +10,8 @@ var config    = require(path.join(__dirname, '..', 'config', 'config.json'))['en
 // } else {
 //   var sequelize = new Sequelize(config.database, config.username, config.password, config);
 // }
-var sequelize = new Sequelize('mysql://stormHack:bigbyStraw2018!@aa17x88067b3bp1.ct0hnq2ct2gz.us-east-1.rds.amazonaws.com:3306/stormHack');
-// var sequelize = new Sequelize('mysql://root:root@localhost/hacksqltest');
+// var sequelize = new Sequelize('mysql://stormHack:bigbyStraw2018!@aa17x88067b3bp1.ct0hnq2ct2gz.us-east-1.rds.amazonaws.com:3306/stormHack');
+var sequelize = new Sequelize('mysql://root:root@localhost/hacksqltest');
 var db        = {};
 
 fs
