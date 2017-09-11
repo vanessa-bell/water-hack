@@ -27,8 +27,8 @@
 							</div>
 						
 						<div class="col-xs-hidden col-sm-5">
-							<a href="#" class="pull-right">Full Report
-							</a>
+							<!-- <a href="#" class="pull-right">Full Report
+							</a> -->
 						</div>
 					</div>
 				</div>
@@ -50,12 +50,12 @@
 			<!-- <div class="col-xs-8"> -->
 				<div class="panel panel-default boxy status">
 			<div class="panel-heading">
-			<h3 class="panel-title"> Resources In Your Area</h3>
+			<h3 class="panel-title"> Resources In Your Area</h3> <a href="/resource/add">Add Resource</a>
 			</div>
 				<ul class="nav nav-tabs" role="tablist">
 				    <li role="presentation" class="active"><a href="#free" aria-controls="free" role="tab" data-toggle="tab">Free Water</a></li>
 				    <li role="presentation"><a href="#purchase" aria-controls="purchase" role="tab" data-toggle="tab">Purchase Water</a></li>
-				    <li role="presentation"><a href="#purchase" aria-controls="purchase" role="tab" data-toggle="tab">Gas Stations</a></li>
+				    <li role="presentation"><a id="gasStationLink" href="#gas" aria-controls="gas" role="tab" data-toggle="tab">Gas Stations</a></li>
 				    <li role="presentation"><a href="#purchase" aria-controls="purchase" role="tab" data-toggle="tab">Storm Shelters</a></li>
 				  </ul>
 					  <!-- Tab panes -->
@@ -69,6 +69,20 @@
 				    <div role="tabpanel" class="tab-pane" id="purchase">
 			    		<table class="paidResultsTable table table-responsive table-striped">
 							<tbody>
+							</tbody>
+						</table>
+				    </div>
+				    <div role="tabpanel" class="tab-pane" id="gas">
+			    		<table id="gasTable" class="table table-responsive table-striped">
+			    			<thead>
+			    				<th>Address</th>
+			    				<th>Distance</th>
+			    				<th>Reg Price</th>
+			    				<th>Has Gas?</th>
+			    				
+			    			</thead>
+							<tbody>
+
 							</tbody>
 						</table>
 				    </div>
@@ -99,6 +113,7 @@
 <script>
 window.onload = function() {
 		  var alertData = [];
+		  var zipData = [];
 		  var startPos;
 		  var geoSuccess = function(position) {
 		    startPos = position;
@@ -154,6 +169,20 @@ window.onload = function() {
 			  }	
 			  console.log(alertData[0]);
 
+			  var settings2 ={
+			  	"async": true,
+			  	"crossDomain":true,
+			  	"url": "http://api.geonames.org/findNearbyPostalCodesJSON?lat="+latitude+"&lng="+longitude+
+			  	"&username=Weitzmam",
+			  	"method": "GET",
+			  }
+			  $.ajax(settings2).done(function(response2) {
+			  	console.log(response2);
+			  	for (x in response2){
+			  		zipData.push(response2[x].postalCode);
+			  	}
+			  })
+
 			});
 		}
 		$('#alertModal').on('show.bs.modal', function (e) {
@@ -188,6 +217,33 @@ window.onload = function() {
 
 			});
 		})
+		$("#gasStationLink").click(function(){
+
+			var distance =5;
+			var latitude = $("#latitude").val();
+			var longitude = $("#longitude").val();
+
+			
+				// get the data for that zip and push to gasStations Array
+				var gasAjaxSettings = {
+					"async" : true,
+					"crossDomain": true,
+					"url":"/ajax/gas",
+					 "method": "GET",
+				}
+				$.ajax(gasAjaxSettings).done(function (responseGas){
+					// console.log(responseGas);
+					// console.log(responseGas.status);
+					// console.log(responseGas.stations);
+					var parsed = jQuery.parseJSON(responseGas);
+					// console.log(parsed.stations);
+					for (x in parsed.stations){
+						
+						$("#gasTable").append("<tr><td>"+parsed.stations[x].address+"</td><td>"+parsed.stations[x].distance+"</td><td>"+parsed.stations[x].reg_price+"</td><td><a href='#'> <span class='glyphicon glyphicon-thumbs-up' aria-hidden='true'>Yes(0)</span></a>&nbsp&nbsp<a href='#'><span class='glyphicon glyphicon-thumbs-down' aria-hidden='true'>No(0)</span></a></td></tr>")
+					}
+				})
+			})
+
 	}
 	$(document).ready(function(){
 		console.log('ready');

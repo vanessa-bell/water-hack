@@ -6,6 +6,7 @@ var stores = require('../controllers/stores.js');
 var waterpoints = require('../controllers/waterpoints.js');
 var yelper = require('../controllers/yelp.js');
 var alerts = require('../controllers/alerts.js');
+var gas_stations = require('../controllers/gas_stations.js');
 // var stores = require('../controllers/stores.js');
 module.exports = function(app){
 	app.get("/", function (request, response){
@@ -62,6 +63,12 @@ module.exports = function(app){
 		response.render('new_water_point',{lat:request.session.latitude,long:request.session.longitude});
 	})
 
+	app.get("/resource/add",function(request,response){
+		console.log(request.session);
+		
+		response.render('new_water_point',{lat:request.session.latitude,long:request.session.longitude});
+	})
+
 	app.post("/ajax/stores",function(request,response){
 		yelper.search(request,response);
 	})
@@ -72,5 +79,8 @@ module.exports = function(app){
 
 	app.post("/ajax/stormDash",function(request,response){
 		alerts.all(request,response);
+	})
+	app.get("/ajax/gas",function(request,response){
+		gas_stations.all(request,response);
 	})
 }
